@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vertify</title>
+ <style>
+     body { margin:0 auto; height:2000px; background-color:white;}
+     #describe { position: absolute; left:770px;width: 500px;   }
+     #nav { position:fixed;top:10px; left:20px;}
+     img { width:120px; height:40px; cursor:pointer;}
+     #ver1, #ver2, #ver3, #ver4, #ver5, #ver6{  height:200px; width:400px; border:1px dashed #ddd; margin:30px 50px 30px 300px; padding:20px;}
+     span{ color:red; }
+</style>
+</head>
+<body>
+
+<div id="describe">
+ <h4>验证码的作用</h4>
+ <p>防止恶意破解密码、刷票、论坛灌水、刷页。</p>
+ <p>有效防止黑客使用暴力破解的方式进行不断的登录尝试，来盗取密码。</p>
+
+ <h4>常见验证码</h4>
+ <p>（1）数字字母验证码 + 随机干扰像素 + 随机位置 + 随机颜色。</p>
+   <p>（2）汉字验证码 + 随机干扰像素 + 随机位置 + 随机颜色。</p>
+       <p>（3）问题验证码   例如“1+2=？”，“中国的全称是什么？”。</p>    
+          <p>（4）音频验证码  </p>    
+ <p>（5）Gif动画验证码。 主流验证码通过提供静态的图片，比较容易被ocr软件识别，
+使用Gif动画使得识别器不容易辨识哪一个图层是真正的验证码图片，可以更有效得防止识别器的识别。</p>
+
+ <p>（6）手机短信验证码。 一般应用于购物和银行系统，通过发送验证码到手机，可以较准确和安全地保证购物的安全性，验证用户的正确性，是最有效的验证码系统。</p>
+ <p>（7）新型验证码。 如：12306网站新推出的图片选择验证码、图片拖拽补全验证码等。</p>
+
+</div>
+
+    <div id="nav">
+        <h4>实现样例</h4>
+        <ul>
+            <li><a href="#ver1">数字字母组成的验证码</a></li>
+            <li><a href="#ver2">汉字验证码</a></li>
+            <li><a href="#ver3">数学计算验证码</a></li>
+            <li><a href="#ver4">拖拽验证码</a></li>
+            <li><a href="#ver5">12306验证码</a></li>
+            <li><a href="#ver6">Gif动画验证码</a></li>
+        </ul>
+    </div>  
+
+    <div id="ver1" >
+        <img   id="imgVer1" alt="字符组成的验证码" src="Handles/GetVertify.ashx?ver=alphasVertify"/>
+        <br />
+        <input id="txtVer1" type="text" />
+        <input id="submitVer1" type="button" value="提交"/>
+        <span  id="resultVer1"></span>
+    </div>
+    <div id="ver2" > 
+          <img   id="imgVer2"  alt="汉字组成的验证码" src="Handles/GetVertify.ashx?ver=chineseVertify"/>
+            <br />
+            <input id="txtVer2" type="text" />
+            <input id="submitVer2" type="button" value="提交"/>
+            <span  id="resultVer2"></span>
+    </div>
+    <div id="ver3" > 
+        <img   id="imgVer3"  alt="数学计算验证码" src="Handles/GetVertify.ashx?ver=mathVertify"/>
+            <br />
+            <input id="txtVer3" type="text" />
+            <input id="submitVer3" type="button" value="提交"/>
+            <span  id="resultVer3"></span>
+    </div>
+    <div id="ver4" style="position:relative;" > 
+		<canvas id="vertifyCanvas">
+		</canvas>
+		<input id="canvasChange" type="button" value="换一个"  style="position:absolute; left:330px;top:30px;"/>
+		<span  id="canvasResult"></span>
+	</div>
+    <div id="ver5" style="position:relative; padding:0;" > 
+        <img   id="imgVer5"  alt="" style="width:300px;height:200px;" src="Handles/GetVertify.ashx?ver=imagesVertify"/>
+           <input id="changeImg" type="button" value="换一批" style="position:absolute; left:330px;top:30px;"/>
+           <input id="submitVer5" type="button" value="提交"  style="position:absolute; left:330px;top:60px;"/>
+           <span  id="resultVer5"></span>
+    </div>
+    
+    <div id="ver6">
+        <p>下图中有几种不同的东西？</p>
+        <img   id="imgVer6" alt="Gif验证码" style="width:200px; height:100px;"/>
+        <br />
+        <input id="txtVer6" type="text" />
+        <input id="submitVer6" type="button" value="提交"/>
+        <span  id="resultVer6"></span>
+    
+     
+    </div>
+</body>
+
+<script  type="text/javascript">
+    // 由于页面同时并发访问GetVertify.ashx来写入Session，会触发Session锁，导致Session的值异常，
+    // 所以增加一些延迟，实际应用时不需要此段代码！
+window.onload=function(){
+    setTimeout(function(){$("#imgVer1").click();},100)
+    setTimeout(function(){$("#imgVer2").click();},300)
+    setTimeout(function(){$("#imgVer3").click();},600)
+    setTimeout(function(){$("#imgVer5").click();},800)
+    setTimeout(function(){$("#imgVer6").click();},1000)
+}
+
+</script>
+
+<script src="JS/jquery.min.js" type="text/javascript"></script>
+<script src="JS/index.js" type="text/javascript"></script>
+<script src="JS/canvasVertify.js" type="text/javascript"></script>
+
+
+</html>
